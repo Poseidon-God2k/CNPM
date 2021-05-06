@@ -1,19 +1,34 @@
-{{# each products}}
+<div class="small-container">
     <div class="row">
-        {{# each this}}
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img class="img-responsive" src="{{this.imagePath}}" alt="...">
-                    <div class="caption">
-                        <h3>{{this.title}}</h3>
-                        <p>{{this.description}}</p>
-                        <div class="clearfix">
-                            <div class="pull-left"><strong>{{this.price}}đ</strong></div>
-                            <a href="/add-to-cart/{{this._id}}" class="btn btn-success pull-right" role="button">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        {{# each products}}
+                    {{# each  this}}
+                        {{#fourIf  @index}}
+                            </div>
+                            <div class="row">
+                        {{/fourIf}}
+
+                            <div class="col-4">
+                                <a href="/product-details/{{this._id}}">
+                                    {{#with this.listImg}}
+                                    <img src="{{this.[0]}}" alt="">
+                                    {{/with}}</a>
+                                    <div class="fontname editname">{{this.name}}</div>
+                                    <div class="rating">
+                                        <i>{{this.rate}}</i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                <p>{{this.price}}</p>
+                            </div>
+                {{/each}}
         {{/each}}
+        </div>
+</div>
+    <div class="row">
+        <div class="page-btn">
+        {{# each page}}
+            <span onclick="javascript:location.href='/products/{{this}}?textSearch={{../text}}&sort={{../option}}'">{{this}}</span>
+        {{/each}}
+        </div>
     </div>
-{{/each}}
+
+

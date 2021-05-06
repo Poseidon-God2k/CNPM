@@ -1,0 +1,94 @@
+<div class="small-container single-product"> 
+        <div class="row">
+            {{#with data}}
+                    <div class="col-2">
+                        <img id="zoom_01" src="{{this.listImg.[0]}}" data-zoom-image="{{this.listImg.[0]}}" class="productImg">
+                        <div class="small-img-row">
+                            {{# each this.listImg}}
+                                {{#fourIf  @index}}
+                                    {{else}}
+                                    <div class="small-img-col">
+                                        <img src="{{this}}" class="small-img" alt="">
+                                    </div>
+                                {{/fourIf}}
+                                {{/each}}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <span>{{this.name}}</span>
+                        <h4>{{this.price}}</h4>
+                        <select name="option_size">
+                            <option>Chọn kích thước</option>
+                            {{# each this.listVar}}
+                                <option>{{this}}</option>
+                            {{/each}}
+                        </select>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                        <input type="submit" value="Thêm vào giỏ hàng " class="btn" name="submit" style="width:200px;">
+                        <h3>Chi tiết sản phẩm <i class="fa fa-indent"></i></h3>
+                        <br>
+                        <div>{{this.description}}</div>
+                    </div>
+                {{/with}}
+        </div>
+</div>
+
+<!-- js for product gallery -->
+    <script>
+        function changeZoomImg(src1,src2){
+            src1 = src2;
+            $("#zoom_01").attr('data-zoom-image', src2);
+            var square = document.getElementsByClassName("zoomWindow");
+            square[0].style.backgroundImage = "url("+src2+")";
+        }
+        var productImg = document.getElementsByClassName("productImg");
+        var showImg = document.getElementById("showImg");
+        var smallImg = document.getElementsByClassName("small-img")
+        smallImg[0].onclick = function(){
+            productImg[0].src = smallImg[0].src;
+            $("#zoom_01").attr('data-zoom-image', smallImg[0].src);
+            var square = document.getElementsByClassName("zoomWindow");
+            square[0].style.backgroundImage = "url("+smallImg[0].src+")";
+        }
+        smallImg[0].onmouseover = function(){
+            productImg[0].src = smallImg[0].src;
+            changeZoomImg(productImg[0].src,smallImg[0].src);
+        }
+        smallImg[1].onclick = function(){
+            changeZoomImg(productImg[0].src,smallImg[1].src);
+        }
+        smallImg[1].onmouseover = function(){
+            productImg[0].src = smallImg[1].src;
+            changeZoomImg(productImg[0].src,smallImg[1].src);
+        }
+
+        smallImg[2].onclick = function(){
+            changeZoomImg(productImg[0].src,smallImg[2].src);
+        }
+        smallImg[2].onmouseover = function(){
+            productImg[0].src = smallImg[2].src;
+            changeZoomImg(productImg[0].src,smallImg[2].src);
+        }
+
+        smallImg[3].onclick = function(){
+            changeZoomImg(productImg[0].src,smallImg[3].src);
+        }
+        smallImg[3].onmouseover = function(){
+            productImg[0].src = smallImg[3].src;
+            changeZoomImg(productImg[0].src,smallImg[3].src);
+        }
+
+    </script>
+    <script type="text/javascript">
+        if($(window).width() > 769){
+            $('#zoom_01').elevateZoom({
+                scrollZoom: true});
+        }
+        else{
+            $('#zoom_01').elevateZoom({
+                zoomType: "lens",
+                lensShape: "round",
+                lensSize: 200});
+        }
+        
+    </script>

@@ -11,9 +11,14 @@
       <a class="navbar-brand" href="/">Brand</a>
     </div>
     <div>
-      <form class="navbar-form navbar-left">
+      <form class="navbar-form navbar-left" action="" method="GET">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" placeholder="Search" name="textSearch">
+          <select id="sort" name="sort">
+            <option value="default">Chọn option sort</option>
+            <option value="asc">Giá tăng dần</option>
+            <option value="desc">Giá giảm dần</option>
+        </select>
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>

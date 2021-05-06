@@ -1,0 +1,139 @@
+
+<div class="theme--ofs">
+    <div class="product-briefing flex card content-product">
+        <div class="left-side-product">
+            <div class="flex flex-column">
+                <div class="relative-position">
+                    <div class="relative-position">
+                        <div class="relative-position">
+                            <div id="over-img" class="over-product-img effect-img" style="background-image: url(&quot;{{imgOver}}&quot;); background-size: contain; background-repeat: no-repeat;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-img-slide">
+                    {{# each data.listImg}}
+                    <div class="ele-slide"><div class="relative-position"><div class="relative-position"><div class="ele-img effect-img" style="background-image: url(&quot;{{this}}&quot;); background-size: contain; background-repeat: no-repeat;"></div></div></div></div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-auto right-side">
+            <div class="flex-auto flex-column  padding-right" style="">
+                <div class="top-name-box">
+                    <span>{{data.name}}</span>
+                </div>
+                    <div class="flex nav-margin-top">
+                        <div class="flex box-divide">
+                            <div class="color-star style-divide-box ">{{data.rate}}</div>
+                            <div class="font-text-divide">
+                                <div class="shopee-rating-stars">
+                                    <div class="shopee-rating-stars__stars">
+                                        {{# each listStar}}
+                                        <div class="shopee-rating-stars__star-wrapper">
+                                            <div class="shopee-rating-stars__lit" style="width: {{this}}%;">
+                                                <svg enable-background="new 0 0 15 15" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__primary-star icon-rating-solid">
+                                                    <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon>
+                                                </svg>
+                                            </div>
+                                            <svg enable-background="new 0 0 15 15" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon shopee-rating-stars__hollow-star icon-rating">
+                                                <polygon fill="none" points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polygon>
+                                            </svg>
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="flex box-divide">
+                        <div class="style-divide-box">{{data.vote}}</div>
+                        <div class="font-text-divide">đánh giá</div>
+                    </div>
+                    <div class="flex box-divide-sold">
+                        <div class="aca9MM">{{data.sold}}</div>
+                        <div class="INCrso">đã bán</div>
+                    </div>
+                </div>
+                <div style="margin-top: 10px;">
+                    <div class="flex flex-column">
+                        <div class="flex flex-column price-item">
+                            <div class="flex items-center">
+                                <div class="flex items-center style-price-item-box">
+                                    <div class="flex items-center">
+                                        <div class="style-price" id="price">{{data.price}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="select-option">
+                    <div class="flex flex-column">
+                            <div class="flex child-option option-variation" >
+                                <div class="flex flex-column">
+                                    <div class="flex items-center" style="margin-bottom: 8px; align-items: baseline;">
+                                        <label class="tag-name-option">Variation</label>
+                                        <div class="flex items-center items-variation">
+                                            {{# each data.listVar}}
+                                                <button class="product-variation" id="variationId{{@index}}">{{this}}</button>
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center option-quantity">
+                                        <div class="tag-name-option">Số lượng</div>
+                                            <div class="flex items-center">
+                                                <div style="margin-right: 15px;">
+                                                    <div class="box-quantity shopee-input-quantity">
+                                                        <button class="style-button-quantity" id="decrease">
+                                                            <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon ">
+                                                                <polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon>
+                                                                    </svg>
+                                                                </button>
+                                                                <input id="input-quantity" class="style-input-quantity style-button-quantity" type="text" value="1">
+                                                                <button class="style-button-quantity" id="increase">
+                                                                    <svg enable-background="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0" class="shopee-svg-icon icon-plus-sign">
+                                                                <polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            <div>{{data.quantity}} sản phẩm có sẵn</div>
+                                        </div>
+                                    </div>
+                                    <div id="error-msg" class="error-msg"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <div class="bottom-right">
+                            <div class="action-right">
+                                <button id="add-to-cart" type="button" class="btn btn-tinted btn--l style-font-text-button add-cart-button" aria-disabled="false">
+                                    <svg enable-background="new 0 0 15 15" viewBox="0 0 15 15" x="0" y="0" class="shopee-svg-icon _2FCuXA icon-add-to-cart"><g><g><polyline fill="none" points=".5 .5 2.7 .5 5.2 11 12.4 11 14.5 3.5 3.7 3.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></polyline><circle cx="6" cy="13.5" r="1" stroke="none"></circle><circle cx="11.5" cy="13.5" r="1" stroke="none"></circle></g><line fill="none" stroke-linecap="round" stroke-miterlimit="10" x1="7.5" x2="10.5" y1="7" y2="7"></line><line fill="none" stroke-linecap="round" stroke-miterlimit="10" x1="9" x2="9" y1="8.5" y2="5.5"></line></g></svg>
+                                    <span>thêm vào giỏ hàng</span>
+                                </button>
+                                <button type="button" class="btn btn-solid-primary btn--l style-font-text-button" aria-disabled="false">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <div class="flex flex-column">
+                            <div id="completed-msg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<div class="product-detail page-product__detail">
+    <div class="padding-page-product-detail">
+        <div class="title-product-detail">MÔ TẢ SẢN PHẨM</div>
+        <div class="title-padding">
+            <div class="content-title">
+                <span>{{data.description}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='/js/productDetails.js'></script>
