@@ -1,7 +1,7 @@
 <div class="small-container">
     <div class="row">
         {{# each products}}
-                    {{# each  this}}
+                    {{!-- {{# each  this}} --}}
                         {{#fourIf  @index}}
                             </div>
                             <div class="row">
@@ -17,9 +17,9 @@
                                         <i>{{this.rate}}</i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div>
-                                <p>{{this.price}}</p>
+                                <p>₫{{this.price}}</p>
                             </div>
-                {{/each}}
+                {{!-- {{/each}} --}}
         {{/each}}
         </div>
 </div>

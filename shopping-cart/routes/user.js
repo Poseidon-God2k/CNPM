@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var csrf = require('csurf');
+var Cart = require('../models/cart_db');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/shopping', {useNewUrlParser: true, useUnifiedTopology: true});
 const passport = require('passport');
 
 var csrfProtection = csrf();
@@ -11,6 +14,23 @@ router.get('/profile',isLoggedIn,function(req, res, next){
 });
 
 router.get('/logout',isLoggedIn, function(req,res,next){
+  //Store cart to cart before logout
+  // console.log(typeof req.session.cart)
+  if(req.session.cart){
+    var cart = new Cart({
+      userId: req.session.passport.user,
+      listCart: req.session.cart,
+      checkPayment: req.session.checkPayment || false,
+      transId: req.session.transId || "-1"
+    })
+    cart.save(function(err, result){
+      if(err) throw err;
+      else 
+        console.log(result);
+    })
+  }
+  // session destroy when isLoggedIn false
+  req.session.destroy();
   req.logout();
   res.redirect('/');
 });

@@ -1,13 +1,3 @@
-// function convertInt_VND(x){
-//     console.log(x)
-//     return parseInt(x.toString().replaceAll('.',''), 10)
-// }
-
-
-function numberWithDots(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
 module.exports = function Cart(oldCart){
     this.items = oldCart.items || {};
     this.totalQty = oldCart.totalQty || 0;

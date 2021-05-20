@@ -17,7 +17,7 @@
                             
                             <small>Loại: {{this.variaty}}</small>
                             </br>
-                            <small>Đơn giá: {{this.item.price}}</small>
+                            <small>Đơn giá: ₫{{this.item.price}}</small>
                             <br>    
                             <a href="/remove/{{this.item._id}}?variaty={{this.variaty}}">Xóa</a>
                         </div>
@@ -42,7 +42,7 @@
                         </button>
                     </div>
                 </td>
-                <td>{{this.price}}</td>
+                <td>₫{{this.price}}</td>
             </tr>
             {{/each}}
         {{/each}}
@@ -51,15 +51,43 @@
         <table>
             <tr>
                 <td>Tổng thanh toán</td>
-                <td>{{totalOrder}}</td>
+                <td>₫{{totalOrder}}</td>
             </tr>
             <tr>
                 <td>VAT(10%)</td>
-                <td>{{vat}}</td>
+                <td>₫{{vat}}</td>
             </tr>
             <tr>
                 <td>Tổng tiền</td>
-                <td>{{totalPrice}}</td>
+                <td>₫{{totalPrice}}</td>
+            </tr>
+            <style>
+                a{
+                    text-decoration: none !important;;
+                }
+                .button {
+                padding: 15px 15px;
+                font-size: 20px;
+                text-align: center;
+                cursor: pointer;
+                outline: none;
+                color: #fff;
+                background-color: #ff523b;
+                border: none;
+                border-radius: 15px;
+                box-shadow: 0 3px rgb(192, 176, 168);
+                }
+
+                .button:hover {background-color: #ff733c}
+
+                .button:active {
+                background-color: #ff5b19;
+                box-shadow: 0 2px #666;
+                transform: translateY(4px);
+                }
+            </style>
+            <tr>
+                <td style="width: 100%; padding:0;"><a href="/payment/{{cartId}}?totalPayment={{totalPayment}}" role="button" class="button">Thanh toán</a></td>
             </tr>
         </table>
     </div>

@@ -70,8 +70,24 @@ app.use(function(req, res, next){
   res.locals.session = req.session;
   next();
 });
+
+//express fileupload middleare
+// app.use(fileUpload());
+
+//set global errors variable
+
+app.locals.errors =null;
+
+
+
+var routes = require('./routes/index');
+var userRoutes = require('./routes/user');
+var paymentRoutes = require('./routes/payment');
+
+app.use('/payment', paymentRoutes);
 app.use('/user', userRoutes);
 app.use('/', routes);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
