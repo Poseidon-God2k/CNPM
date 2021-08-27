@@ -64,7 +64,7 @@ router.get('/add-to-cart' , function(req, res, next){
   var productVariaty = productItem.variation;
  
   if(req.session.passport && !req.session.cart){
-    CartDb.findOne({"userId":req.session.passport.user, "checkPayment": false}, function(err, cartOfUser){
+    CartDb.findOne({"userId":req.session.passport.user.id, "checkPayment": false}, function(err, cartOfUser){
       if(err) console.log(err)
       if(cartOfUser){
       var cart = new Cart(cartOfUser.listCart)
@@ -72,7 +72,7 @@ router.get('/add-to-cart' , function(req, res, next){
         if(err)
           console.log(err);
         cart.add(product, productId, productQuantity, productVariaty);
-        CartDb.findOneAndUpdate({"userId":req.session.passport.user, "checkPayment": false}, {listCart: cart},{new: true}, function(err, docs){
+        CartDb.findOneAndUpdate({"userId":req.session.passport.user.id, "checkPayment": false}, {listCart: cart},{new: true}, function(err, docs){
           if(err) console.log(err)
           res.send(JSON.stringify({"msg":"Thêm vào giỏ hàng thành công"}));
         })
@@ -85,7 +85,7 @@ router.get('/add-to-cart' , function(req, res, next){
             console.log(err);
           cartDb.add(product, productId, productQuantity, productVariaty);
           var cart = new CartDb({
-            userId: req.session.passport.user,
+            userId: req.session.passport.user.id,
             listCart: cartDb,
             checkPayment: req.session.checkPayment || false,
             transId: req.session.transId || "-1"
@@ -116,11 +116,11 @@ router.get('/add/:id', function(req, res, next){
   var productId = req.params.id;
   var variaty = req.query.variaty;
   if(req.session.passport && !req.session.cart){
-    CartDb.findOne({"userId":req.session.passport.user, "checkPayment": false}, function(err, cartOfUser){
+    CartDb.findOne({"userId":req.session.passport.user.id, "checkPayment": false}, function(err, cartOfUser){
       if(err) console.log(err)
       var cart = new Cart(cartOfUser.listCart)
       cart.increaseOne(productId, variaty);
-      CartDb.findOneAndUpdate({"userId":req.session.passport.user, "checkPayment": false}, {listCart: cart},{new: true}, function(err, docs){
+      CartDb.findOneAndUpdate({"userId":req.session.passport.user.id, "checkPayment": false}, {listCart: cart},{new: true}, function(err, docs){
         if(err) console.log(err)
         console.log(docs)
         res.redirect('/shopping-cart');
@@ -140,11 +140,11 @@ router.get('/reduce/:id', function(req, res, next){
   var productId = req.params.id;
   var variaty = req.query.variaty;
   if(req.session.passport && !req.session.cart){
-    CartDb.findOne({"userId":req.session.passport.user, "checkPayment": false}, function(err, cartOfUser){
+    CartDb.findOne({"userId":req.session.passport.user.id, "checkPayment": false}, function(err, cartOfUser){
       if(err) console.log(err)
       var cart = new Cart(cartOfUser.listCart)
       cart.reduceByOne(productId, variaty);
-      CartDb.findOneAndUpdate({"userId":req.session.passport.user, "checkPayment": false}, {listCart: cart},{new: true}, function(err, docs){
+      CartDb.findOneAndUpdate({"userId":req.session.passport.user.id, "checkPayment": false}, {listCart: cart},{new: true}, function(err, docs){
         if(err) console.log(err)
         console.log(docs)
         res.redirect('/shopping-cart');
@@ -163,11 +163,11 @@ router.get('/remove/:id', function(req, res, next){
   var productId = req.params.id;
   var variaty = req.query.variaty;
   if(req.session.passport && !req.session.cart){
-    CartDb.findOne({"userId":req.session.passport.user, "checkPayment": false}, function(err, cartOfUser){
+    CartDb.findOne({"userId":req.session.passport.user.id, "checkPayment": false}, function(err, cartOfUser){
       if(err) console.log(err)
       var cart = new Cart(cartOfUser.listCart)
       cart.removeItem(productId, variaty);
-      CartDb.findOneAndUpdate({"userId":req.session.passport.user, "checkPayment": false}, {listCart: cart},{new: true}, function(err, docs){
+      CartDb.findOneAndUpdate({"userId":req.session.passport.user.id, "checkPayment": false}, {listCart: cart},{new: true}, function(err, docs){
         if(err) console.log(err)
         console.log(docs)
         res.redirect('/shopping-cart');
@@ -186,7 +186,7 @@ router.get('/shopping-cart', async function(req,res,next){
 
   if(req.session.passport && !req.session.cart){
     var dbCart = await (async () => {
-      const cart = await CartDb.findOne({"userId":req.session.passport.user, "checkPayment": false}).lean().exec()
+      const cart = await CartDb.findOne({"userId":req.session.passport.user.id, "checkPayment": false}).lean().exec()
       return cart
     })();
     if(dbCart){

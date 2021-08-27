@@ -14,23 +14,6 @@ router.get('/profile',isLoggedIn,function(req, res, next){
 });
 
 router.get('/logout',isLoggedIn, function(req,res,next){
-  //Store cart to cart before logout
-  // console.log(typeof req.session.cart)
-  if(req.session.cart){
-    var cart = new Cart({
-      userId: req.session.passport.user,
-      listCart: req.session.cart,
-      checkPayment: req.session.checkPayment || false,
-      transId: req.session.transId || "-1"
-    })
-    cart.save(function(err, result){
-      if(err) throw err;
-      else 
-        console.log(result);
-    })
-  }
-  // session destroy when isLoggedIn false
-  req.session.destroy();
   req.logout();
   res.redirect('/');
 });
@@ -67,6 +50,23 @@ module.exports = router;
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     //req.isAuthenticated() will return true if user is logged in
+    //Store cart to cart before logout
+  // console.log(typeof req.session.cart)
+  if(req.session.cart){
+    var cart = new Cart({
+      userId: req.session.passport.user.id,
+      listCart: req.session.cart,
+      checkPayment: req.session.checkPayment || false,
+      transId: req.session.transId || "-1"
+    })
+    cart.save(function(err, result){
+      if(err) throw err;
+      else 
+        console.log(result);
+    })
+  }
+  // session destroy when isLoggedIn false
+  delete req.session.cart;
     next();
   } else{
     res.redirect("/");

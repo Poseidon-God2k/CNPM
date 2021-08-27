@@ -14,7 +14,7 @@
       <form class="navbar-form navbar-left" action="" method="GET">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" name="textSearch">
-          <select id="sort" name="sort">
+          <select id="sort" name="sort" style="height: 34px; padding: 6px 12px;">
             <option value="default">Chọn option sort</option>
             <option value="asc">Giá tăng dần</option>
             <option value="desc">Giá giảm dần</option>
@@ -38,7 +38,12 @@
             <li><a href="/user/logout"></i>Logout</a></li>
             {{else}}
             <li><a href="/user/signup"></i>Sign up</a></li>
+            <li role="separator" class="divider"></li>
             <li><a href="/user/signin">Sign in</a></li>
+            {{/if}}
+            {{#if vendor}}
+            <li role="separator" class="divider"></li>
+            <li><a href="/vendor">Vendor page</a></li>
             {{/if}}
           </ul>
         </li>

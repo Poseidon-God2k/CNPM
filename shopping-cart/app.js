@@ -22,7 +22,7 @@ app.use(cors())
 var routes = require('./routes/index');
 var userRoutes = require('./routes/user');
 
-mongoose.connect('mongodb://localhost:27017/shopping', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://mongo:27017/shopping', {useNewUrlParser: true, useUnifiedTopology: true});
 require('./config/passport')
 
 var hbs = expressHsb.create({});
@@ -68,6 +68,11 @@ app.use('/js', express.static(__dirname + './../public/js'));
 app.use(function(req, res, next){
   res.locals.login = req.isAuthenticated();
   res.locals.session = req.session;
+  if(req.session.passport){
+    if(req.session.passport.user){
+      res.locals.vendor = req.session.passport.user.type == "vendor"? true:false;
+    }
+  }
   next();
 });
 
@@ -83,7 +88,9 @@ app.locals.errors =null;
 var routes = require('./routes/index');
 var userRoutes = require('./routes/user');
 var paymentRoutes = require('./routes/payment');
+var vendorRoutes = require('./routes/vendor');
 
+app.use('/vendor', vendorRoutes);
 app.use('/payment', paymentRoutes);
 app.use('/user', userRoutes);
 app.use('/', routes);

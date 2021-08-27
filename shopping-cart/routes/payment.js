@@ -93,6 +93,7 @@ router.get("/:id", function(req,res, next){
 
 router.get('/', function(req, res, next){
     if(req.query.message == "Success"){
+        console.log("Payment complete");
         var transId = req.query.transId
         var update = {
             checkPayment: true,
